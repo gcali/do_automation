@@ -29,6 +29,21 @@ def destroy_droplet(*args):
     do = _do_creator()
     _pretty_print(do.destroy_droplet(droplet_id))
 
+def create_amsterdam(*args):
+    """
+    Creates a new droplet with sensible defaults
+    Usage:
+        [name]
+    Arguments:
+        name: (optional) name to give the droplet; if missing, current timestamp
+    """
+    name = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H-%M-%S.%f")
+    try:
+        name = args[0]
+    except:
+        pass
+    return create_small_droplet(name, 'ams2', 'ubuntu-17-04-x64')
+
 def create_small_droplet(*args):
     """
     Creates a new droplet
@@ -235,6 +250,7 @@ _ACTION_MAPPING = {
         'list_droplets' : list_droplets,
         'droplets_verbose': list_droplets_verbose,
         'create': create_small_droplet,
+        'create_amsterdam': create_amsterdam,
         'destroy': destroy_droplet,
 
         'regions': list_regions,
