@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import sys, json, socket, datetime
@@ -111,8 +111,11 @@ def list_droplets_verbose(*args):
     _pretty_print(_do_creator().all_active_droplets())
 
 def list_droplets(*args):
+    """
+    Lists all active droplets with minimal information
+    """
     _pretty_print([
-        { 'id': droplet['id'], 'name': droplet['name']}
+        { 'id': droplet['id'], 'name': droplet['name'], 'ip_address': droplet['ip_address']}
         for droplet in 
         _do_creator().all_active_droplets()
         ])
@@ -248,6 +251,7 @@ def ssh_remove(*args):
 _ACTION_MAPPING = {
         'droplets': list_droplets,
         'list_droplets' : list_droplets,
+        'list': list_droplets,
         'droplets_verbose': list_droplets_verbose,
         'create': create_small_droplet,
         'create_amsterdam': create_amsterdam,
